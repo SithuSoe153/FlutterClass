@@ -1,24 +1,47 @@
+// compare
+
+// override , only for the ==
+
+// DataType bool, void (return) , bool only for ==
+// operator
+// - (operator that we want to override)
+//( DataType varname ) DataType of the class
+// {}, =>
+
+// @override , only for the ==
+// hashCode , only for the ==
+
 class A {
   final int i;
 
-  A({
-    required this.i,
-  });
+  A({required this.i});
 
-// need 3 things to override operators
-// DataType (return) (void,bool)
-// operator
-// - , +
-//()
+  A operator +(A other) => A(i: other.i + i);
 
+  B operator -(B other) => B(i - other.o);
+
+  @override
+  bool operator ==(covariant B other) => i == other.o;
+
+  @override
+  int get hashCode => i.hashCode;
 }
 
-void main(List<String> args) {
-  final A a = A(i: 10);
+class B {
+  final int o;
 
-  final A b = A(i: 15);
+  B(this.o);
+}
 
-  final result = A(i: a.i + b.i);
+class C {}
 
-  print(result.i);
+void main() {
+  final A first = A(i: 10);
+
+  final C second = C();
+
+  final B third = B(3);
+
+  final bool result = first == third;
+  print(result);
 }
